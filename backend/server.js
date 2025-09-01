@@ -69,7 +69,7 @@ setInterval(() => {
   } catch (error) {
     console.error('Error updating patients:', error);
   }
-}, 3000);
+}, 1000);
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

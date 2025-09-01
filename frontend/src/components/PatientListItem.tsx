@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import { useValueHighlight } from '../hooks/useValueHighlight';
 
 interface PatientListItemProps {
   patient: {
@@ -16,6 +17,11 @@ interface PatientListItemProps {
 
 const PatientListItem = ({ patient }: PatientListItemProps) => {
   const { id, name, age, heartRate, oxygenSaturation, bloodPressure, temperature, lastUpdated } = patient;
+  
+  // Track which values are changing
+  const isHeartRateHighlighted = useValueHighlight(heartRate);
+  const isOxygenHighlighted = useValueHighlight(oxygenSaturation);
+  const isTemperatureHighlighted = useValueHighlight(temperature);
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString();
   };
@@ -46,6 +52,12 @@ const PatientListItem = ({ patient }: PatientListItemProps) => {
     }
   };
 
+  const getHighlightStyle = (isHighlighted: boolean) => {
+    return isHighlighted 
+      ? 'animate-pulse bg-blue-200 border-2 border-blue-400 shadow-lg transform scale-105' 
+      : '';
+  };
+
   return (
     <Card>
       <div className="flex justify-between items-start mb-4">
@@ -63,14 +75,14 @@ const PatientListItem = ({ patient }: PatientListItemProps) => {
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium text-gray-700">Heart Rate</span>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(getVitalStatus(heartRate, 'heartRate'))}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 ${getStatusColor(getVitalStatus(heartRate, 'heartRate'))} ${getHighlightStyle(isHeartRateHighlighted)}`}>
               {heartRate} bpm
             </span>
           </div>
           
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium text-gray-700">Oxygen Saturation</span>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(getVitalStatus(oxygenSaturation, 'oxygen'))}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 ${getStatusColor(getVitalStatus(oxygenSaturation, 'oxygen'))} ${getHighlightStyle(isOxygenHighlighted)}`}>
               {oxygenSaturation}%
             </span>
           </div>
@@ -84,7 +96,7 @@ const PatientListItem = ({ patient }: PatientListItemProps) => {
           
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium text-gray-700">Temperature</span>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(getVitalStatus(temperature, 'temperature'))}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 ${getStatusColor(getVitalStatus(temperature, 'temperature'))} ${getHighlightStyle(isTemperatureHighlighted)}`}>
               {temperature}°C
             </span>
           </div>
