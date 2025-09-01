@@ -1,45 +1,50 @@
-# React + TypeScript + Vite Starter
+# Patient Dashboard
 
-A minimal starter template for React applications with TypeScript and Vite.
+Real-time patient monitoring dashboard with WebSocket integration.
 
 ## Features
 
-- React 19
-- TypeScript
-- Vite
-- SCSS
-- ESLint
-- Minimal setup
+- Real-time patient vital signs updates
+- Search and sort functionality
+- WebSocket + React Query integration
+- TypeScript + Tailwind CSS
 
-## Getting Started
+## Setup
 
+### Backend
 ```bash
-# Install dependencies
+cd backend
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+npm start
 ```
+Runs on `http://localhost:4000`
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Runs on `http://localhost:3000`
+
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS, Vite
+- **Backend**: Express.js, Socket.IO
+- **State**: React Query
+- **Data**: JSON file storage
 
 ## Project Structure
 
 ```
-src/
-├── App.tsx          # Main App component
-├── main.tsx         # Entry point
-├── index.scss       # Styles
-└── vite-env.d.ts    # Vite types
+├── backend/
+│   ├── db.json          # Patient data
+│   ├── server.js        # WebSocket + REST server
+│   └── package.json
+└── frontend/
+    ├── src/
+    │   ├── components/  # React components
+    │   ├── hooks/       # Custom hooks
+    │   └── services/    # API and WebSocket
+    └── package.json
 ```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
