@@ -2,6 +2,12 @@
 
 Real-time patient monitoring dashboard with WebSocket integration.
 
+
+
+https://github.com/user-attachments/assets/0d1e8f13-199c-43cd-90ef-7fef46607405
+
+
+
 ## Features
 
 - Real-time patient vital signs updates
